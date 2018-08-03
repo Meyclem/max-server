@@ -12,11 +12,14 @@ Soit **en [téléchargement direct](https://github.com/Meyclem/max-server/archiv
 
 
 #### Installation des outils nécessaires
-<u>Vous devez avoir Node.js installé. Si ce n'est pas le cas, suivez ces étapes:</u>
+**Vous devez avoir Node.js installé. Si ce n'est pas le cas, suivez ces étapes:**
+
 Afin d'utiliser le serveur il est obligatoire d'installer ce qui suit avec les lignes de commande correspondantes dans le terminal.
 **Homebrew**
-`brew -v`
-si hombrew est installé vous devriez en voir la version comme ici:
+```
+brew -v
+```
+si hombrew est installé vous devriez voir la version comme ici:
 ```
 Homebrew 1.7.1
 ```
@@ -30,29 +33,58 @@ brew update
 ```
 node -v
 ```
+Si node est installé vous devriez avoir une version indiquée:
+```
+v10.0.0
+```
+Si ce n'est pas le cas:
 ```
 brew install node
 ```
 **yarn**
-`brew install yarn`
+```
+yarn -v
+```
+Si yarn est installé vous devriez avoir une version indiquée:
+```
+1.7.0
+```
+Si ce n'est pas le cas:
+```
+brew install yarn
+```
 
 **nodemon**
 Dans le terminal:
 `yarn global add nodemon`
+
+#### Installation des dépendances du serveur
+Après avoir vérifié les versions et/ou installé le nécessaire, allez dans le répertoire du projet avec le terminal puis lancez:
+```
+yarn install
+````
+Cette commande permet l'installation des dépendances nécessaires au lancement du serveur.
 ___
 ## Utilisation
-utilisation en projection
+**POUR LES DIFFUSIONS**
+Afin d'utiliser le serveur lors d'une diffusion, ouvrez le terminal, allez dans le répertoire du serveur puis:
 ```
 yarn serve
 ```
-tests en local
+Cette commande permet au serveur local d'écouter les évènements émis par les utilisateurs de l'application web.
+
+**POUR LES TESTS EN MODE LOCAL**
+Allez dans le dossier racine du serveur puis:
 ```
 yarn dev
 ```
+Le serveur se lancera en écoutant les évènements émis sur `http://localhost:3000`.
+Il est possible de redémarrer le serveur à tout moment en tapant `rs` dans le terminal.
 ___
 ## Documentations externes
 - [Node.js](https://nodejs.org/en/)
 - [Express](http://expressjs.com/)
 - [Yarn](https://yarnpkg.com/fr/)
+- [Nodemon](https://github.com/remy/nodemon)
 - [osc-js](https://github.com/adzialocha/osc-js)
 - [socket.io](https://socket.io/docs/)

@@ -4,9 +4,14 @@ const express = require('express')
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 ioClient = require('socket.io-client')
-var socket = ioClient.connect("https://nuxt-websocket.herokuapp.com/");
+let socket
+if (process.env.NODE_ENV === 'development') {
+  socket = ioClient.connect("http://localhost:3000/");
+} else {
+  socket = ioClient.connect("https://nuxt-websocket.herokuapp.com/");
+}
 
-const HTTP_SERVER_PORT = 3000
+const HTTP_SERVER_PORT = 4000
 const OSC_SERVER_PORT = 9000
 const config = {
   udpClient: {
@@ -21,7 +26,7 @@ const config = {
 // Express server for static file hosting
 const app = express()
 
-app.use('/', express.static('dist'))
+// app.use('/', express.static('dist'))
 
 app.listen(HTTP_SERVER_PORT, () => {
   console.log('HTTP server ready')
@@ -34,14 +39,6 @@ const osc = new OSC({ plugin: new OSC.BridgePlugin(config) })
 socket.on('time', (data) => {
   console.log(data)
 })
-
-setInterval(() => {
-  data = new Date().toTimeString()
-  console.log(data)
-  socket.emit('dist', data)
-}, 1000);
-
-let interval
 
 function fetchData() {
   fetch('https://videomap-app.herokuapp.com/buttons')
@@ -62,7 +59,6 @@ function sendMessage(data) {
 
 osc.on('open', () => {
   console.log('OSC server ready')
-  interval = setInterval(fetchData, 1000)
 })
 
 osc.on('error', err => {
@@ -71,17 +67,12 @@ osc.on('error', err => {
 
 osc.on('/param/mymsg', message => {
   console.log(message)
-  console.log("ha")
   const msg = new OSC.Message('/param/test', message.args[0])
   osc.send(msg)
 })
 
 osc.on('close', () => {
   console.log('OSC server closed')
-
-  if (interval) {
-    clearTimeout(interval)
-  }
 })
 
 osc.open()
