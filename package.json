@@ -1,0 +1,17 @@
+{
+  "name": "max-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "serve": "node server/index.js"
+  },
+  "author": "Meyclem",
+  "license": "MIT",
+  "dependencies": {
+    "es6-promise": "^4.2.4",
+    "express": "^4.16.3",
+    "isomorphic-fetch": "^2.2.1",
+    "osc-js": "^1.2.2",
+    "socket.io-client": "^2.1.1"
+  }
+}
