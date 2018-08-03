@@ -69,6 +69,7 @@ Cette commande permet l'installation des dépendances nécessaires au lancement 
 ___
 ## Utilisation
 **POUR LES DIFFUSIONS**
+
 Afin d'utiliser le serveur lors d'une diffusion, ouvrez le terminal, allez dans le répertoire du serveur puis:
 ```
 yarn serve
@@ -76,6 +77,7 @@ yarn serve
 Cette commande permet au serveur local d'écouter les évènements émis par les utilisateurs de l'application web.
 
 **POUR LES TESTS EN MODE LOCAL**
+
 Allez dans le dossier racine du serveur puis:
 ```
 yarn dev
