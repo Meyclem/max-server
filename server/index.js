@@ -1,69 +1,45 @@
-require('dotenv').config()
+// DEPENDENCIES IMPORT
 const OSC = require('osc-js')
 const express = require('express')
+require('dotenv').config()
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 ioClient = require('socket.io-client')
+
+// CLIENT URL DEFINITION
 let socket
 if (process.env.NODE_ENV === 'development') {
+  // This url will be used with yarn dev
   socket = ioClient.connect("http://localhost:3000/");
 } else {
+  // This url will be used with yarn serve
   socket = ioClient.connect("https://nuxt-websocket.herokuapp.com/");
 }
+
+socket.on('time', (data) => { console.log(data) })
 
 const HTTP_SERVER_PORT = 4000
 const OSC_SERVER_PORT = 9000
 const config = {
   udpClient: {
     port: 8080
-  },
-  wsServer: {
-    host: 'localhost',    // @param {string} Hostname of WebSocket server
-    port: 9000            // @param {number} Port of WebSocket server
   }
 }
 
-// Express server for static file hosting
 const app = express()
 
-// app.use('/', express.static('dist'))
+app.listen(HTTP_SERVER_PORT, () => { console.log('HTTP server ready') })
 
-app.listen(HTTP_SERVER_PORT, () => {
-  console.log('HTTP server ready')
-  console.log('NODE_ENV=' + process.env.NODE_ENV)
-})
-
-// OSC websocket server
 const osc = new OSC({ plugin: new OSC.BridgePlugin(config) })
-
-socket.on('time', (data) => {
-  console.log(data)
-})
-
-function fetchData() {
-  fetch('https://videomap-app.herokuapp.com/buttons')
-    .then(response => response.json())
-    .then((data) => {
-      sendMessage(JSON.stringify(data[0]))
-    })
-    .catch(function (error) {
-      console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
-    });
-}
 
 function sendMessage(data) {
   const message = new OSC.Message('/param/test', data)
   osc.send(message)
-  // console.log("server msg", message)
 }
 
-osc.on('open', () => {
-  console.log('OSC server ready')
-})
+osc.on('open', () => { console.log('OSC server ready') })
 
-osc.on('error', err => {
-  console.log('An error occurred', err)
-})
+osc.on('error', err => { console.log('An error occurred', err) })
 
 osc.on('/param/mymsg', message => {
   console.log(message)
@@ -71,8 +47,10 @@ osc.on('/param/mymsg', message => {
   osc.send(msg)
 })
 
-osc.on('close', () => {
-  console.log('OSC server closed')
-})
+setInterval(() => {
+  socket.emit('time', 'yoooooo')
+}, 1000)
+
+osc.on('close', () => { console.log('OSC server closed') })
 
 osc.open()
