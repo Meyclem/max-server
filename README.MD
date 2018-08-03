@@ -12,7 +12,7 @@ Soit **en [téléchargement direct](https://github.com/Meyclem/max-server/archiv
 
 
 #### Installation des outils nécessaires
-Vous devez avoir Node.js installé. Si ce n'est pas le cas, suivez ces étapes:
+<u>Vous devez avoir Node.js installé. Si ce n'est pas le cas, suivez ces étapes:</u>
 Afin d'utiliser le serveur il est obligatoire d'installer ce qui suit avec les lignes de commande correspondantes dans le terminal.
 **Homebrew**
 `brew -v`
