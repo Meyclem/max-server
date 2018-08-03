@@ -1,3 +1,4 @@
+require('dotenv').config()
 const OSC = require('osc-js')
 const express = require('express')
 require('es6-promise').polyfill();
@@ -24,6 +25,7 @@ app.use('/', express.static('dist'))
 
 app.listen(HTTP_SERVER_PORT, () => {
   console.log('HTTP server ready')
+  console.log('NODE_ENV=' + process.env.NODE_ENV)
 })
 
 // OSC websocket server
@@ -69,6 +71,7 @@ osc.on('error', err => {
 
 osc.on('/param/mymsg', message => {
   console.log(message)
+  console.log("ha")
   const msg = new OSC.Message('/param/test', message.args[0])
   osc.send(msg)
 })
