@@ -1,5 +1,5 @@
 # Serveur local Loom
-> Ce projet a été crée en partenariat avec  le **Videomapping European Center** et **Ludovic BURCZYKOWSKI**, PhD Aesthetic, Sciences & Technologies of Arts.
+> Ce projet a été crée en partenariat avec  le **[Videomapping European Center](http://videomappingcenter.com/)**, **Ludovic Burczykowski**, PhD Aesthetic, Sciences & Technologies of Arts et **Jérémy Deschamps**, Game developper.
 
 Ce serveur permet un transfert d'informations en temps réel entre une [application web distante](https://nuxt-websocket.herokuapp.com/mouse) et un logiciel de diffusion tel que [Max Msp](https://cycling74.com/downloads).
 ___
@@ -8,13 +8,14 @@ ___
 #### Téléchargement des fichiers
 Soit **en ligne de commande**, éxécuter: `git clone git@github.com:Meyclem/max-server.git`
 
-Soit **en [téléchargement direct](https://github.com/Meyclem/max-server/archive/master.zip)**, il est ensuite nécessaire de décompresser les fichiers
+Soit **en [téléchargement direct](https://github.com/Meyclem/max-server/archive/master.zip)**, il est ensuite nécessaire de décompresser les fichiers.
 
 
 #### Installation des outils nécessaires
 **Vous devez avoir Node.js installé. Si ce n'est pas le cas, suivez ces étapes:**
 
 Afin d'utiliser le serveur il est obligatoire d'installer ce qui suit avec les lignes de commande correspondantes dans le terminal.
+
 **Homebrew**
 ```
 brew -v
@@ -41,6 +42,7 @@ Si ce n'est pas le cas:
 ```
 brew install node
 ```
+
 **yarn**
 ```
 yarn -v
